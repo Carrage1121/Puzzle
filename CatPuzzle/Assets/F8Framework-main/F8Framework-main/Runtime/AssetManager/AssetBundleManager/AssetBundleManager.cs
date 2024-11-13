@@ -832,10 +832,6 @@ namespace F8Framework.Core
             {
                 fullPath = AssetBundleHelper.GetAssetBundleFullName(null, AssetBundleHelper.SourceType.PACKAGE_PATH);
             }
-            else if (AssetManager.ForceRemoteAssetBundle)
-            {
-                fullPath = AssetBundleHelper.GetAssetBundleFullName(null, AssetBundleHelper.SourceType.REMOTE_ADDRESS);
-            }
             else
             {
                 fullPath = AssetBundleHelper.GetAssetBundleFullName(null, AssetBundleHelper.SourceType.STREAMING_ASSETS);
@@ -860,10 +856,6 @@ namespace F8Framework.Core
             else if (GameConfig.LocalGameVersion.EnablePackage && File.Exists(AssetBundleHelper.GetAssetBundleFullName(abName, AssetBundleHelper.SourceType.PACKAGE_PATH)))
             {
                 fullPath = AssetBundleHelper.GetAssetBundleFullName(null, AssetBundleHelper.SourceType.PACKAGE_PATH);
-            }
-            else if (AssetManager.ForceRemoteAssetBundle)
-            {
-                fullPath = AssetBundleHelper.GetAssetBundleFullName(null, AssetBundleHelper.SourceType.REMOTE_ADDRESS);
             }
             else
             {
@@ -921,28 +913,9 @@ namespace F8Framework.Core
 
             assetBundleLoaders.Clear();
         }
-
-        // WebGL专用异步加载AssetBundleManifest
-        public IEnumerator LoadAssetBundleManifest()  
-        {
-            string manifestPath = AssetBundleHelper.GetAssetBundleManifestPath();
-            if (manifestPath == null)
-                yield break;
-#if UNITY_EDITOR
-                manifestPath = "file://" + manifestPath;
-#endif
-            DownloadRequest assetBundleDownloadRequest = new DownloadRequest(manifestPath, default);
-            yield return assetBundleDownloadRequest.SendAssetBundleDownloadRequestCoroutine(manifestPath);
-            manifest = assetBundleDownloadRequest.DownloadedAssetBundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
-            manifest.GetAllAssetBundles();
-            assetBundleDownloadRequest.DownloadedAssetBundle.Unload(false);
-        }
         
         public void OnInit(object createParam)
         {
-#if UNITY_WEBGL
-            LogF8.LogAsset("（提示）由于WebGL异步加载AssetBundleManifest，请在创建资产模块之后加上：yield return AssetBundleManager.Instance.LoadAssetBundleManifest();");
-#else
             string manifestPath = AssetBundleHelper.GetAssetBundleManifestPath(AssetBundleHelper.SourceType.STREAMING_ASSETS);
             if (manifestPath == null)
                 return;
@@ -953,7 +926,6 @@ namespace F8Framework.Core
                 manifest.GetAllAssetBundles();
                 assetBundle.Unload(false);
             }
-#endif
         }
         
         public void OnUpdate()

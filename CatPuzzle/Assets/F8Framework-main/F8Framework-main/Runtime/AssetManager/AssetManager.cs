@@ -17,9 +17,6 @@ namespace F8Framework.Core
 
         private ResourcesManager _resourcesManager;
         
-        //强制更改资产加载模式为远程（微信小游戏使用）
-        public static bool ForceRemoteAssetBundle = false;
-        
         //资产信息
         public struct AssetInfo
         {
@@ -118,11 +115,6 @@ namespace F8Framework.Core
             public AssetInfo GetAssetInfo(string assetName,
                 AssetAccessMode accessMode = AssetAccessMode.UNKNOWN)
             {
-                if (ForceRemoteAssetBundle)
-                {
-                    accessMode = AssetAccessMode.REMOTE_ASSET_BUNDLE;
-                }
-                
                 if (accessMode.HasFlag(AssetAccessMode.RESOURCE))
                 {
                     bool showTip = !_isEditorMode;
@@ -1072,14 +1064,7 @@ namespace F8Framework.Core
             {
                 if (AssetBundleMap.Mappings.TryGetValue(assetName, out AssetBundleMap.AssetMapping assetmpping))
                 {
-                    if (remote || ForceRemoteAssetBundle)
-                    {
-                        return new AssetInfo(AssetTypeEnum.ASSET_BUNDLE, assetmpping.AssetPath, AssetBundleManager.GetRemoteAssetBundleCompletePath(), assetmpping.AbName);
-                    }
-                    else
-                    {
-                        return new AssetInfo(AssetTypeEnum.ASSET_BUNDLE, assetmpping.AssetPath, AssetBundleManager.GetAssetBundlePathWithoutAb(assetName), assetmpping.AbName);
-                    }
+                    return new AssetInfo(AssetTypeEnum.ASSET_BUNDLE, assetmpping.AssetPath, AssetBundleManager.GetAssetBundlePathWithoutAb(assetName), assetmpping.AbName);
                 }
 
                 if (showTip)
