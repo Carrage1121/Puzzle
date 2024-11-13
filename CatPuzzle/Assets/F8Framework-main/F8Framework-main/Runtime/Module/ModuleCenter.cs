@@ -9,7 +9,7 @@ namespace F8Framework.Core
 	{
 		private class ModuleWrapper
 		{
-			public int Priority = 0;
+			public int Priority = 0; //轮询顺序
 			public IModule Module = null;
 			public bool ShouldBeRemoved = false;
 			
@@ -79,6 +79,7 @@ namespace F8Framework.Core
 			{
 				_isDirty = false;
 
+				//自定义排序 根据轮询顺序排序优先级
 				_comsUpdate.Sort((left, right) =>
 				{
 					if (left.Priority < right.Priority)
@@ -93,6 +94,7 @@ namespace F8Framework.Core
 			// 遍历所有模块
 			for (int i = 0; i < _comsUpdate.Count; i++)
 			{
+				//为空或者应该被移出 则remove
 				if (_comsUpdate[i]?.Module == null || _comsUpdate[i].ShouldBeRemoved)
 				{
 					_comsUpdate.RemoveAt(i);
@@ -243,16 +245,24 @@ namespace F8Framework.Core
 			// 检查类型是否是 MonoBehaviour 的子类
 			if (typeof(MonoBehaviour).IsAssignableFrom(typeof(T)))
 			{
+				//如果是monobehaviour子类 则创建一个同名的gameobject 然后把这个monobehaviour子类挂载在其上
 				GameObject obj = new GameObject(typeof(T).Name, typeof(T));
 				module = obj.GetComponent<T>();
 			}
 			else
 			{
+				//如果不是monobehaviour子类 创建一个该类型的实体？
 				module = Activator.CreateInstance<T>();
 			}
 
+			//创建好module之后绑定ModuleWrapper
+			//优先级和模块都在之前设定好了
 			ModuleWrapper wrapper = new ModuleWrapper(module, priority);
+			
+			//调用模块的初始化Init
 			wrapper.Module.OnInit(createParam);
+			
+			//加入coms的List 排序
 			_coms.Add(wrapper);
 			_coms.Sort((left, right) =>
 			{
@@ -263,6 +273,8 @@ namespace F8Framework.Core
 				else
 					return 1;
 			});
+			
+			//判定类型同时加入对应List 如果有update就加入update 其余同理 可以加入多个
 			if (typeof(T).GetCustomAttributes(typeof(UpdateRefreshAttribute), false).Length > 0)
 			{
 				_comsUpdate.Add(wrapper);
@@ -288,6 +300,7 @@ namespace F8Framework.Core
 		public static bool DestroyModule<T>()
 		{
 			var moduleType = typeof(T);
+			//拿到对应type 从对应List移出
 			for (int i = 0; i < _comsUpdate.Count; i++)
 			{
 				if (_comsUpdate[i].Module.GetType() == moduleType)
@@ -312,6 +325,7 @@ namespace F8Framework.Core
 				}
 			}
 			
+			//总的List移出
 			for (int i = 0; i < _coms.Count; i++)
 			{
 				if (_coms[i].Module.GetType() == moduleType)
@@ -361,6 +375,7 @@ namespace F8Framework.Core
 		/// </summary>
 		public static MonoBehaviour GetBehaviour()
 		{
+			//获取GameLauncher
 			if (_behaviour == null)
 				LogF8.LogError($"{nameof(ModuleCenter)} 未初始化。使用 ModuleCenter.Initialize");
 			return _behaviour;

@@ -66,13 +66,10 @@ namespace F8Framework.Core
             LocalizedStrings.Clear();
             
             // 必须先加载本地化配置表
-#if UNITY_WEBGL
-            LogF8.LogConfig("（提示）由于WebGL异步加载完本地化表，请在创建本地化模块之前加上：yield return F8DataManager.Instance.LoadLocalizedStringsIEnumerator();");
-            LoadSuccess();
-#else
+            //调用指定类的指定方法
+            //LoadLocalizedStrings在assetbundles/config/binconfigdata
             Util.Assembly.InvokeMethod("F8DataManager", "LoadLocalizedStrings", new object[] { });
             LoadSuccess();
-#endif
         }
 
         private void LoadSuccess()

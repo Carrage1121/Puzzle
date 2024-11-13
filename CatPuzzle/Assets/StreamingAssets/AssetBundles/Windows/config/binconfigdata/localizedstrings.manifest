@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+UnityVersion: 2023.2.20f1c1
+CRC: 3379237101
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: dbf0ff77058abfbe103d41dfd2c38148
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: b49d3baa8345aab232a820d3aab28874
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/AssetBundles/Config/BinConfigData/LocalizedStrings.bytes
+Dependencies: []
