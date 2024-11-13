@@ -29,9 +29,9 @@ namespace F8Framework.Launcher
             FF8.Audio = ModuleCenter.CreateModule<AudioManager>();
             FF8.Tween = ModuleCenter.CreateModule<Tween>();
             FF8.UI = ModuleCenter.CreateModule<UIManager>();
-            //FF8.Local = ModuleCenter.CreateModule<Localization>(); //本地化表打不开 暂时应该也用不到本地化
-            FF8.SDK = ModuleCenter.CreateModule<SDKManager>();
-            FF8.Download = ModuleCenter.CreateModule<DownloadManager>();
+            // FF8.Local = ModuleCenter.CreateModule<Localization>(); //本地化表打不开 暂时应该也用不到本地化
+            // FF8.SDK = ModuleCenter.CreateModule<SDKManager>(); //SDK用不到
+            // FF8.Download = ModuleCenter.CreateModule<DownloadManager>(); //资源下载用不到
             FF8.LogWriter = ModuleCenter.CreateModule<F8LogWriter>();
 
             StartGame();
@@ -41,7 +41,9 @@ namespace F8Framework.Launcher
         // 开始游戏
         public void StartGame()
         {
+            //游戏启动
             
+            //
         }
 
         void Update()

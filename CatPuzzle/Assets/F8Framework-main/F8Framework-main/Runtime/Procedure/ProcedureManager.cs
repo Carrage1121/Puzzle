@@ -116,7 +116,7 @@ namespace F8Framework.Core
         /// </summary>
         /// <param name="type">要检查的流程节点类型。</param>
         /// <returns>如果存在指定类型的流程节点，则为 true；否则为 false。</returns>
-        public bool HasProcedureNode(Type type)
+        private bool HasProcedureNode(Type type)
         {
             if (type == null)
                 throw new ArgumentNullException("类型无效！");
