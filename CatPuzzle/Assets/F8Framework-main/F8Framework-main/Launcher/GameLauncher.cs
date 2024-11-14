@@ -44,7 +44,7 @@ namespace F8Framework.Launcher
             //游戏启动
             
             //加载游戏场景
-            FF8.Asset.Load<GameObject>("GameScene.prefab",AssetManager.AssetAccessMode.RESOURCE);
+            FF8.Asset.Load<GameObject>("GameScene",AssetManager.AssetAccessMode.RESOURCE);
         }
 
         void Update()
