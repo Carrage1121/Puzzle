@@ -2,6 +2,7 @@ using System.Collections;
 using F8Framework.Core;
 using F8Framework.F8ExcelDataClass;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace F8Framework.Launcher
 {
@@ -43,8 +44,11 @@ namespace F8Framework.Launcher
         {
             //游戏启动
             
-            //加载游戏场景
-            FF8.Asset.Load<GameObject>("GameScene",AssetManager.AssetAccessMode.RESOURCE);
+            //加载游戏
+            FF8.Asset.LoadAsync<GameObject>("MainMenu", (mainMenu) =>
+            {
+                GameObject obj = Instantiate(mainMenu);
+            });
         }
 
         void Update()

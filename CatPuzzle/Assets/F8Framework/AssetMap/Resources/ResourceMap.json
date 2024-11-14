@@ -1,1 +1,1 @@
-{"GameScene":"GameScene","GameStart":"GameStart","AssetBundleMap":"AssetBundleMap","ResourceMap":"ResourceMap","GameVersion":"GameVersion"}
+{"GameStart":"Scene/GameStart","MainMenu":"Scene/MainMenu","AssetBundleMap":"AssetBundleMap","ResourceMap":"ResourceMap","GameVersion":"GameVersion"}
