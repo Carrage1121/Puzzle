@@ -42,9 +42,12 @@ namespace F8Framework.Launcher
         // 开始游戏
         public void StartGame()
         {
-            //游戏启动
+            //start
             
-            //加载游戏
+            //init
+            //FF8.UI.Initialize();
+            
+            //加载游戏主界面
             FF8.Asset.LoadAsync<GameObject>("MainMenu", (mainMenu) =>
             {
                 GameObject obj = Instantiate(mainMenu);
