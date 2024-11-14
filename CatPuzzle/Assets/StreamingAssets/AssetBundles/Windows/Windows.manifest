@@ -1,14 +1,20 @@
 ManifestFileVersion: 0
 UnityVersion: 2023.2.20f1c1
-CRC: 920259174
+CRC: 3410450124
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: config/binconfigdata/localizedstrings
+      Name: gameplay/scenes/gamescene
       Dependencies: {}
     Info_1:
-      Name: config/binconfigdata/sheet1
+      Name: gameplay/scenes/gamestart
       Dependencies: {}
     Info_2:
+      Name: config/binconfigdata/localizedstrings
+      Dependencies: {}
+    Info_3:
+      Name: config/binconfigdata/sheet1
+      Dependencies: {}
+    Info_4:
       Name: config/binconfigdata/sheet2
       Dependencies: {}

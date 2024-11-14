@@ -134,10 +134,15 @@ namespace F8Framework.F8ExcelDataClass
 				return default(T);
 			}
 			AssetManager.Instance.Unload(name, false);
+#if UNITY_WEBGL
+			T obj = Util.LitJson.ToObject<T>(textAsset.text);
+			return obj;
+#else
 			using (MemoryStream memoryStream = new MemoryStream(textAsset.bytes))
 			{
 				return (T)f.Deserialize(memoryStream);
 			}
+#endif
 		}
 
 		[Preserve]

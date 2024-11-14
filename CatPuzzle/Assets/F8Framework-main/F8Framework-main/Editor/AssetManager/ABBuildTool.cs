@@ -29,6 +29,7 @@ namespace F8Framework.Core.Editor
             GenerateAssetNames();
             GenerateResourceNames();
             LogF8.LogAsset("自动设置AssetBundleName（AB名为空时）");
+            
             AssetDatabase.Refresh();
             
             FileTools.CheckDirAndCreateWhenNeeded(strABOutPAthDir);
