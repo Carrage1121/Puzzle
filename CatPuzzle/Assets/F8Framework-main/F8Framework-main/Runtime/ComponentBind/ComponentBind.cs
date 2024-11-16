@@ -87,7 +87,6 @@ namespace F8Framework.Core
                     //DefaultCodeBindNameTypeConfig.BindNameTypeDict.Keys对应UI组件
                     //例如tmp image btn
                     
-                    LogF8.LogAsset(name);
                     foreach (var key in DefaultCodeBindNameTypeConfig.BindNameTypeDict.Keys)
                     {
                         if (!name.Contains(key))
