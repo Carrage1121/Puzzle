@@ -55,11 +55,21 @@ public class MainMenu : BaseView
     
     // 自动获取组件（自动生成，不能删除）
     [SerializeField] private Canvas Canvas_Canvas;
+    [SerializeField] private Button BeginGameButtonImage_Button;
+    [SerializeField] private Image BeginGameButtonImage_Image;
+    [SerializeField] private TMPro.TMP_Text TextTMP_TextTMP;
+    [SerializeField] private TMPro.TMP_Text TextTMP_TextTMP_2;
+    [SerializeField] private TMPro.TMP_Text TextTMP_TextTMP_3;
 
 #if UNITY_EDITOR
     protected override void SetComponents()
     {
         Canvas_Canvas = transform.Find("Canvas").GetComponent<Canvas>();
+        BeginGameButtonImage_Button = transform.Find("Canvas/Panel/ButtonList/BeginGame-Button-Image").GetComponent<Button>();
+        BeginGameButtonImage_Image = transform.Find("Canvas/Panel/ButtonList/BeginGame-Button-Image").GetComponent<Image>();
+        TextTMP_TextTMP = transform.Find("Canvas/Panel/ButtonList/BeginGame-Button-Image/Text (TMP)").GetComponent<TMPro.TMP_Text>();
+        TextTMP_TextTMP_2 = transform.Find("Canvas/Panel/ButtonList/Ac/Text (TMP)").GetComponent<TMPro.TMP_Text>();
+        TextTMP_TextTMP_3 = transform.Find("Canvas/Panel/ButtonList/Exit/Text (TMP)").GetComponent<TMPro.TMP_Text>();
     }
 #endif
     // 自动获取组件（自动生成，不能删除）

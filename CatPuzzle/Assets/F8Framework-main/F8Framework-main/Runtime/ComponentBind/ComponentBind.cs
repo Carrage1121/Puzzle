@@ -84,6 +84,10 @@ namespace F8Framework.Core
                 foreach (var name in nameDivision)
                 {
                     // 检查物体名字的一部分是否包含在字典的key中
+                    //DefaultCodeBindNameTypeConfig.BindNameTypeDict.Keys对应UI组件
+                    //例如tmp image btn
+                    
+                    LogF8.LogAsset(name);
                     foreach (var key in DefaultCodeBindNameTypeConfig.BindNameTypeDict.Keys)
                     {
                         if (!name.Contains(key))
